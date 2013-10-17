@@ -1,0 +1,4 @@
+howto
+=====
+
+practicing nested resources
