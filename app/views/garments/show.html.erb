@@ -10,6 +10,6 @@
   <%= @garment.difficulty %>
 </p>
 
-
+<%= link_to 'Instructions', garment_steps_path(@garment) %> |
 <%= link_to 'Edit', edit_garment_path(@garment) %> |
 <%= link_to 'Back', garments_path %>
