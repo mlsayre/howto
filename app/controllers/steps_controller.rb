@@ -1,6 +1,8 @@
 class StepsController < ApplicationController
   # GET /steps
   # GET /steps.json
+  before_filter :garment_steps
+
   def index
     @steps = Step.all
 
@@ -40,11 +42,11 @@ class StepsController < ApplicationController
   # POST /steps
   # POST /steps.json
   def create
-    @step = Step.new(params[:step])
+    @step = @garment.steps.new(params[:step])
 
     respond_to do |format|
       if @step.save
-        format.html { redirect_to @step, notice: 'Step was successfully created.' }
+        format.html { redirect_to [@garment, @step], notice: 'Step was successfully created.' }
         format.json { render json: @step, status: :created, location: @step }
       else
         format.html { render action: "new" }
@@ -79,5 +81,9 @@ class StepsController < ApplicationController
       format.html { redirect_to steps_url }
       format.json { head :no_content }
     end
+  end
+
+  def garment_steps
+    @garment = Garment.find(params[:garment_id])
   end
 end

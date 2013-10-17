@@ -1,4 +1,3 @@
-<% @garment = Garment.find(params[:garment_id]) %>
 <h1>Listing steps for a <%= @garment.name %> </h1>
 
 <table>
@@ -12,9 +11,9 @@
 <% @steps.each do |step| %>
   <tr>
     <td><%= step.instruction %></td>
-    <td><%= link_to 'Show', step %></td>
-    <td><%= link_to 'Edit', edit_step_path(step) %></td>
-    <td><%= link_to 'Destroy', step, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', garment_step_path(@garment,step) %></td>
+    <td><%= link_to 'Edit', edit_garment_step_path(@garment,step) %></td>
+    <td><%= link_to 'Destroy', [@garment, step], method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

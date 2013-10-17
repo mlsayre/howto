@@ -1,9 +1,9 @@
 Howto::Application.routes.draw do
+
   resources :garments do
     resources :steps
   end
 
-  match 'steps' => 'garments/:garment_id/steps'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
