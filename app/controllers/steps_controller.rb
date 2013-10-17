@@ -1,21 +1,22 @@
 class StepsController < ApplicationController
   # GET /steps
   # GET /steps.json
-  before_filter :garment_steps
+  before_filter :step_find, only: [:show, :edit, :update, :destroy]
+  before_filter :garment_find
 
   def index
-    @steps = Step.all
+    @step = @garment.steps.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @steps }
+      format.json { render json: [@garment, steps] }
     end
   end
 
   # GET /steps/1
   # GET /steps/1.json
   def show
-    @step = Step.find(params[:id])
+    @step = @garment.steps.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class StepsController < ApplicationController
   # GET /steps/new
   # GET /steps/new.json
   def new
-    @step = Step.new
+    @step = @garment.steps.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +37,7 @@ class StepsController < ApplicationController
 
   # GET /steps/1/edit
   def edit
-    @step = Step.find(params[:id])
+    @step = @garment.steps.find(params[:id])
   end
 
   # POST /steps
@@ -58,11 +59,11 @@ class StepsController < ApplicationController
   # PUT /steps/1
   # PUT /steps/1.json
   def update
-    @step = Step.find(params[:id])
+    @step = @garment.steps.find(params[:id])
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
-        format.html { redirect_to @step, notice: 'Step was successfully updated.' }
+        format.html { redirect_to [@garment, @step], notice: 'Step was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -83,7 +84,12 @@ class StepsController < ApplicationController
     end
   end
 
-  def garment_steps
+  def step_find
+    @step = Step.find(params[:id])
+  end
+
+  def garment_find
     @garment = Garment.find(params[:garment_id])
   end
+
 end

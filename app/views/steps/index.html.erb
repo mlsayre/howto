@@ -8,11 +8,11 @@
     <th></th>
   </tr>
 
-<% @steps.each do |step| %>
+<% @step.each do |step| %>
   <tr>
     <td><%= step.instruction %></td>
-    <td><%= link_to 'Show', garment_step_path(@garment,step) %></td>
-    <td><%= link_to 'Edit', edit_garment_step_path(@garment,step) %></td>
+    <td><%= link_to 'Show', garment_step_path(@garment, @step) %></td>
+    <td><%= link_to 'Edit', edit_garment_step_path(@garment, @step) %></td>
     <td><%= link_to 'Destroy', [@garment, step], method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
